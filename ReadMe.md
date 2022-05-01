@@ -1,13 +1,8 @@
-# Note to the Evaluator
-I have used starter kit from the documents mentioned with the interview question. https://geektrust.s3.ap-southeast-1.amazonaws.com/starter-kit/java-maven.zip
-
 # Pre-requisites
 * Java 1.8/1.11/1.15
 * Maven
 
-# How to run the code
-
-We have provided scripts to execute the code. 
+# How to run the code 
 
 Use `run.sh` if you are Linux/Unix/macOS Operating systems and `run.bat` if you are on Windows.  Both the files run the commands silently and prints only output from the input file `sample_input/input1.txt`. You are supposed to add the input commands in the file from the appropriate problem statement. 
 

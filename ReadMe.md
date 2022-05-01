@@ -1,3 +1,6 @@
+# Note to the Evaluator
+I have used starter kit from the documents mentioned with the interview question. https://geektrust.s3.ap-southeast-1.amazonaws.com/starter-kit/java-maven.zip
+
 # Pre-requisites
 * Java 1.8/1.11/1.15
 * Maven

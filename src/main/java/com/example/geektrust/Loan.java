@@ -3,7 +3,7 @@ package com.example.geektrust;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Math.ceil;
+import static java.lang.Math.*;
 
 public class Loan {
 
@@ -32,7 +32,7 @@ public class Loan {
     }
 
     // Returns the amount paid till the given emi sequence including it
-    private long getTotalAmountPaidAsEmi(int emiSequence){
+    private long getTotalAmountIfPaidAsEmi(int emiSequence){
         return this.emiAmount*emiSequence;
     }
 
@@ -45,9 +45,9 @@ public class Loan {
     public long getAmountPaid(int emiSequence){
         // sum of lumpsums and emi amount paid
         long totalLumpSum = this.getTotalLumpSumPaidTillEmi(emiSequence);
-        long totalEmiAmountPaid = this.getTotalAmountPaidAsEmi(emiSequence);
-        return totalLumpSum + totalEmiAmountPaid;
-
+        long totalIfPaidAsEmi = this.getTotalAmountIfPaidAsEmi(emiSequence);
+        // If this is the last emi, sum of totalLumpSum and totalIfPaidAsEmi may overshoot actual amount to be repayed, take min of both
+        return min(totalLumpSum + totalIfPaidAsEmi, (long)ceil(totalAmountToRepay));
     }
 
     // Returns the number of EMI's remaining after {emiSequence} of EMIs are paid with any lump sum amount if any.

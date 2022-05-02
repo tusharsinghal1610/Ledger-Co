@@ -33,7 +33,7 @@ public class Loan {
 
     // Returns the amount paid till the given emi sequence including it
     private long getTotalAmountPaidAsEmi(int emiSequence){
-        return emiAmount*emiSequence;
+        return this.emiAmount*emiSequence;
     }
 
     // adds the lumpsum given the given emi sequence

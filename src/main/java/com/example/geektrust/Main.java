@@ -13,9 +13,6 @@ public class Main {
                 return;
             }
 
-            // initialize Ledger
-            Ledger ledger = new Ledger();
-
             // read the input from a text file
             File file = new File(args[0]);
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
@@ -34,16 +31,16 @@ public class Main {
                         long principalAmount = Long.parseLong(inputs[3]);
                         int numberOfYears = Integer.parseInt(inputs[4]);
                         float rateOfInterest = Float.parseFloat(inputs[5]);
-                        ledger.createLoan(bankName, borrowerName, principalAmount, numberOfYears, rateOfInterest);
+                        Ledger.createLoan(bankName, borrowerName, principalAmount, numberOfYears, rateOfInterest);
                         break;
                     case "PAYMENT":
                         long lumpSumAmount = Long.parseLong(inputs[3]);
                         emiSequence = Integer.parseInt(inputs[4]);
-                        ledger.processPayment(bankName, borrowerName, lumpSumAmount, emiSequence);
+                        Ledger.processPayment(bankName, borrowerName, lumpSumAmount, emiSequence);
                         break;
                     case "BALANCE":
                         emiSequence = Integer.parseInt(inputs[3]);
-                        System.out.println(ledger.getBalanceStatement(bankName, borrowerName, emiSequence));
+                        System.out.println(Ledger.getBalanceStatement(bankName, borrowerName, emiSequence));
                         break;
                     default:
                         throw new IllegalArgumentException("Invalid input command " + inputCommand);

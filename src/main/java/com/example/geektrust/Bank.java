@@ -5,55 +5,48 @@ import java.util.Map;
 
 public class Bank {
     private String name;
-    private final Map<String,User> userNameToUserMap;
+    private final Map<User,Loan> userToLoanMap;
 
     Bank(String name){
         this.name = name;
-        this.userNameToUserMap = new HashMap<>();
+        this.userToLoanMap = new HashMap<>();
     }
 
-    private User getUser(String userName){
-        // get the user
-        User user = userNameToUserMap.get(userName);
-        // create new user if not exist
-        // This will be in accordance with Ledger's company policy. My assumption is to create the user if not exist.
-        if(user == null) {
-            user = new User(userName);
-            userNameToUserMap.put(userName, user);
-        }
-        return user;
+    // get assigned loan
+    private Loan getLoanByUser(User user){
+        return userToLoanMap.get(user);
     }
 
     // get Loan for a User
-    public void createLoan(String userName, long amount, int numberOfYears, float rateOfInterest){
-        // get the user
-        User user = getUser(userName);
-        // get loan for user
-        user.createLoan(amount, numberOfYears, rateOfInterest);
+    public void createLoan(User user, long amount, int numberOfYears, float rateOfInterest){
+        // create loan for user
+        Loan loan = new Loan(amount, numberOfYears, rateOfInterest);
+        // assign the loan to user
+        userToLoanMap.put(user, loan);
     }
 
     // payments
-    public void processPayment(String userName, long lumpSum, int emiSequence){
-        // get the user
-        User user = getUser(userName);
+    public void processPayment(User user, long lumpSum, int emiSequence){
+        // get the user's loan
+        Loan loan = getLoanByUser(user);
         // process the Payment
-        user.processPayment(lumpSum, emiSequence);
+        loan.processPayment(lumpSum, emiSequence);
     }
 
     // Returns the amount paid in total till {emiSequence} of EMIs are paid with any lump sum amount if any
-    public long getAmountPaid(String userName, int emiSequence){
-        // get the user
-        User user = getUser(userName);
+    public long getAmountPaid(User user, int emiSequence){
+        // get the user's laon
+        Loan loan = getLoanByUser(user);
         // get the amount paid
-        return user.getAmountPaid(emiSequence);
+        return loan.getAmountPaid(emiSequence);
     }
 
     // Returns the number of EMI's remaining after {emiSequence} of EMIs are paid with any lump sum amount if any.
-    public int getNumberOfRemainingEmi(String userName, int emiSequence){
-        // get the user
-        User user = getUser(userName);
+    public int getNumberOfRemainingEmi(User user, int emiSequence){
+        // get the user's loan
+        Loan loan = getLoanByUser(user);
         // get Number Of Remaining Emis
-        return user.getNumberOfRemainingEmi(emiSequence);
+        return loan.getNumberOfRemainingEmi(emiSequence);
     }
 
 }

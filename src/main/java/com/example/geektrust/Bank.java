@@ -22,13 +22,13 @@ public class Bank {
         // create loan for user
         Loan loan = new Loan(amount, numberOfYears, rateOfInterest);
         // assign the loan to user
-        userToLoanMap.put(user, loan);
+        this.userToLoanMap.put(user, loan);
     }
 
     // payments
     public void processPayment(User user, long lumpSum, int emiSequence){
         // get the user's loan
-        Loan loan = getLoanByUser(user);
+        Loan loan = this.getLoanByUser(user);
         // process the Payment
         loan.processPayment(lumpSum, emiSequence);
     }
@@ -36,7 +36,7 @@ public class Bank {
     // Returns the amount paid in total till {emiSequence} of EMIs are paid with any lump sum amount if any
     public long getAmountPaid(User user, int emiSequence){
         // get the user's laon
-        Loan loan = getLoanByUser(user);
+        Loan loan = this.getLoanByUser(user);
         // get the amount paid
         return loan.getAmountPaid(emiSequence);
     }
@@ -44,7 +44,7 @@ public class Bank {
     // Returns the number of EMI's remaining after {emiSequence} of EMIs are paid with any lump sum amount if any.
     public int getNumberOfRemainingEmi(User user, int emiSequence){
         // get the user's loan
-        Loan loan = getLoanByUser(user);
+        Loan loan = this.getLoanByUser(user);
         // get Number Of Remaining Emis
         return loan.getNumberOfRemainingEmi(emiSequence);
     }

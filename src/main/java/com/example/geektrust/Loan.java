@@ -18,14 +18,14 @@ public class Loan {
         this.principalAmount = principalAmount;
         this.rateOfInterest = rateOfInterest;
         this.tenureInYears = numberOfYears;
-        this.totalAmountToRepay = principalAmount + principalAmount*rateOfInterest*tenureInYears/100;
-        this.emiAmount = (long) ceil(totalAmountToRepay /(tenureInYears*12));
+        this.totalAmountToRepay = principalAmount + principalAmount*rateOfInterest * this.tenureInYears/100;
+        this.emiAmount = (long) ceil(this.totalAmountToRepay /(this.tenureInYears*12));
         this.lumpSums = new ArrayList<>();
     }
 
     // Returns the total lump sum amount paid till the given emi sequence including it
     private long getTotalLumpSumPaidTillEmi(int emiSequence){
-        // sum of lump sum which are paid with emi sequence less than emiSequence
+        // sum of lump sum which are paid with emi sequence less than or equal to emiSequence
         return lumpSums.stream()
                 .filter(lumpSum -> lumpSum.getEmiSequence()<=emiSequence)
                 .mapToLong(LumpSum::getAmount).sum();
